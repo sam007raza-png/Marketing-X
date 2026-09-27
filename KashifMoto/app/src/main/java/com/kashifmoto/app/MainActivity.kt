@@ -41,7 +41,7 @@ class MainActivity : Activity() {
       root.addView(ScrollView(this).apply{addView(content)},LinearLayout.LayoutParams(-1,0,1f))
       val nav=LinearLayout(this).apply{orientation=LinearLayout.HORIZONTAL;setPadding(dp(8),dp(5),dp(8),dp(5));setBackgroundColor(Color.WHITE)}
       val labels=listOf("⌂ Home","🔎 Search","🛒 Cart","👤 Profile")
-      labels.forEach{lab->nav.addView(tv(lab,13f,true).apply{gravity=Gravity.CENTER;setOnClickListener{when(lab.first()){'⌂'->home();'🔎'->searchScreen();'🛒'->cartScreen();else->profile()}}},LinearLayout.LayoutParams(0,dp(52),1f))}
+      labels.forEachIndexed{idx,lab->nav.addView(tv(lab,13f,true).apply{gravity=Gravity.CENTER;setOnClickListener{when(idx){0->home();1->searchScreen();2->cartScreen();else->profile()}}},LinearLayout.LayoutParams(0,dp(52),1f))}
       root.addView(nav);setContentView(root)
     }
     private fun home(){base("KashifMoto 🍽️");val e=EditText(this).apply{hint="Search restaurants, dishes...";setSingleLine(true);setPadding(dp(16),0,dp(16),0);background=bg(Color.WHITE,24)};content.addView(e,LinearLayout.LayoutParams(-1,dp(52)));content.addView(tv("Good food, delivered fast ⚡",18f,true).apply{setPadding(0,dp(16),0,dp(8))});render(e)}
