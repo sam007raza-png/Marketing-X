@@ -32,3 +32,9 @@ jobs:
         with:
           name: KashifMoto-APK
           path: app/build/outputs/apk/debug/app-debug.apk
+      - name: Publish APK Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete v1.0.0 --yes --cleanup-tag || true
+          gh release create v1.0.0 app/build/outputs/apk/debug/app-debug.apk --title "KashifMoto v1.0.0" --notes "Ready-to-install KashifMoto Android APK. Offline-first demo build."
