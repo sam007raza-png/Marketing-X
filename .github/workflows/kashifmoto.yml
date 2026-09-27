@@ -19,8 +19,10 @@ jobs:
         env:
           ANDROID_HOME: /usr/local/lib/android/sdk
         run: |
-          printf 'y\ny\ny\ny\ny\ny\ny\ny\ny\ny\n' | /usr/local/lib/android/sdk/cmdline-tools/16.0/bin/sdkmanager --licenses > /dev/null || true
-          /usr/local/lib/android/sdk/cmdline-tools/16.0/bin/sdkmanager "platforms;android-35" "build-tools;35.0.0"
+          SDKMANAGER=$(find /usr/local/lib/android/sdk/cmdline-tools -name sdkmanager -type f | head -1)
+          echo "Using $SDKMANAGER"
+          printf 'y\ny\ny\ny\ny\ny\ny\ny\ny\ny\n' | "$SDKMANAGER" --licenses > /dev/null || true
+          "$SDKMANAGER" "platforms;android-35" "build-tools;35.0.0"
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: "8.10.2"
